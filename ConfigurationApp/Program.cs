@@ -30,12 +30,18 @@ builder.Services.AddScoped<SampleService>();
 //        }
 //    });
 
-//4 validation in class as attribute
-builder.Services.AddOptions<ServiceConfiguration>()
-    .Bind(builder.Configuration.GetSection(ServiceConfiguration.SectionName))
-    .ValidateDataAnnotations();
+//4 validation in class as attribute and additional validations according you
+//builder.Services.AddOptions<ServiceConfiguration>()
+//    .Bind(builder.Configuration.GetSection(ServiceConfiguration.SectionName))
+//    .ValidateDataAnnotations()
+//    .Validate((config) =>
+//    {
+//        return config.ApiKey.Length > 6;
+//    },"Apikey value has to be lenght more than 6!");
 
-
+//5 special classes
+    
+    
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
