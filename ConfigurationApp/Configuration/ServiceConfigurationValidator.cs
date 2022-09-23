@@ -11,7 +11,19 @@ namespace ConfigurationApp.Configuration
     {
         public ValidateOptionsResult Validate(string name, ServiceConfiguration options)
         {
-            throw new NotImplementedException();//TODO https://youtu.be/xFcnetdso-0?t=786
+            var validationResult = "";//TODO https://youtu.be/xFcnetdso-0?t=786
+
+            if (string.IsNullOrEmpty(options.ApiKey))
+            {
+                validationResult += "Api key is missing";
+            }
+
+            if (!string.IsNullOrEmpty(validationResult))
+            {
+                return ValidateOptionsResult.Fail(validationResult);
+            }
+
+            return ValidateOptionsResult.Success;
         }
     }
 }

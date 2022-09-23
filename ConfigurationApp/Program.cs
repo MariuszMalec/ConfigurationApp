@@ -1,5 +1,6 @@
 using ConfigurationApp.Configuration;
 using ConfigurationApp.Services;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,9 +40,13 @@ builder.Services.AddScoped<SampleService>();
 //        return config.ApiKey.Length > 6;
 //    },"Apikey value has to be lenght more than 6!");
 
-//5 special classes
-    
-    
+//5 special classes custom validator
+builder.Services.AddOptions<ServiceConfiguration>()
+    .Bind(builder.Configuration.GetSection(ServiceConfiguration.SectionName));
+  //.ValidateOnStart();//od razu na starcie apki
+
+builder.Services.AddSingleton<IValidateOptions<ServiceConfiguration>, ServiceConfigurationValidator>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
