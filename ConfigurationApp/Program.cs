@@ -18,7 +18,7 @@ builder.Services.AddScoped<SampleService>();
 //builder.Services.Configure<ServiceConfiguration>(
 //    builder.Configuration.GetSection(ServiceConfiguration.SectionName));
 
-//3 ,  2 patrz SampleService validation
+//3 ,  2 patrz SampleService validation is here
 //builder.Services.AddOptions<ServiceConfiguration>()
 //    .Configure<IConfiguration>((serviceConfig, configuration) =>
 //    {
@@ -31,19 +31,20 @@ builder.Services.AddScoped<SampleService>();
 //        }
 //    });
 
-//4 validation in class as attribute and additional validations according you
+//4 validation in class as attribute and additional validations according you https://youtu.be/xFcnetdso-0?t=882
 //builder.Services.AddOptions<ServiceConfiguration>()
 //    .Bind(builder.Configuration.GetSection(ServiceConfiguration.SectionName))
 //    .ValidateDataAnnotations()
 //    .Validate((config) =>
 //    {
 //        return config.ApiKey.Length > 6;
-//    },"Apikey value has to be lenght more than 6!");
+//    }, "Apikey value has to be lenght more than 6!");
 
 //5 special classes custom validator
 builder.Services.AddOptions<ServiceConfiguration>()
-    .Bind(builder.Configuration.GetSection(ServiceConfiguration.SectionName));
-  //.ValidateOnStart();//od razu na starcie apki
+    .Bind(builder.Configuration.GetSection(ServiceConfiguration.SectionName))
+    .ValidateOnStart();//od razu na starcie apki https://youtu.be/xFcnetdso-0?t=961
+    ;
 
 builder.Services.AddSingleton<IValidateOptions<ServiceConfiguration>, ServiceConfigurationValidator>();
 
